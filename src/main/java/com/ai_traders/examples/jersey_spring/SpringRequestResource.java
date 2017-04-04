@@ -34,4 +34,8 @@ public class SpringRequestResource {
     public String getHello() {
         return greetingService.greet("world " + counter.incrementAndGet());
     }
+
+    public void setGreetingService(GreetingService greetingService) {
+        this.greetingService = greetingService;
+    }
 }

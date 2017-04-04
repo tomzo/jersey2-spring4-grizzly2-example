@@ -3,6 +3,13 @@
 Based on [official example](https://github.com/jersey/jersey/tree/2.25.x/examples/helloworld-spring-annotations) but with newer dependencies,
  specifically Spring 4 instead of 3.
 
+This is an opinionated example of getting all parts working together, which can be hard. Some main points:
+
+ * Project should be deployed as self-hosting (fat) jar.
+ * Tests should easily run on CLI `mvn test` and in graphical IDE (IntelliJ).
+ * There should be unit tests where we can mock any selected service and using mockito for verification
+ * There should be integration tests were we rely on spring to compose entire server
+
 ## Standalone demo
 
 Create a fat jar with maven:
@@ -27,3 +34,9 @@ Try out http://0.0.0.0:8080/base/spring
 ```
 
 Browse to `http://localhost:8080/base/spring`
+
+# Sources
+
+ * https://github.com/jersey/jersey/tree/2.25.x/examples/helloworld-spring-annotations
+ * https://github.com/Hylke1982/jersey2-spring-test-example
+ * http://stackoverflow.com/questions/32264431/how-to-write-a-test-case-for-jersey-rest-resouce-grizzlymockito
