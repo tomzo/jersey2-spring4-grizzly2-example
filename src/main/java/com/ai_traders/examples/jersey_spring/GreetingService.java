@@ -1,6 +1,6 @@
 package com.ai_traders.examples.jersey_spring;
 
-import org.jvnet.hk2.annotations.Service;
+import org.springframework.stereotype.Service;
 
 @Service
 public class GreetingService {
