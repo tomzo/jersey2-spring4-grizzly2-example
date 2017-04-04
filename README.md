@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/tomzo/jersey2-spring4-grizzly2-example.svg?branch=master)](https://travis-ci.org/tomzo/jersey2-spring4-grizzly2-example)
+
 # Jersey 2.25 + Spring 4.3.7 + grizzly 2.3.30
 
 Based on [official example](https://github.com/jersey/jersey/tree/2.25.x/examples/helloworld-spring-annotations) but with newer dependencies,
