@@ -1,0 +1,67 @@
+apply plugin: 'java'
+apply plugin: 'maven'
+
+buildscript {
+    repositories { jcenter() }
+
+    dependencies {
+        classpath "com.netflix.nebula:nebula-dependency-recommender:3.3.0"
+    }
+}
+
+apply plugin: 'nebula.dependency-recommender'
+
+group = 'com.ai_traders.examples'
+version = '1.0.0'
+
+description = "Example of spring 4 and jersey 2"
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+// http://stackoverflow.com/questions/3963708/gradle-how-to-display-test-results-in-the-console-in-real-time
+test {
+    testLogging {
+        events "passed", "skipped", "failed", "standardOut", "standardError"
+    }
+}
+
+//create a single Jar with all dependencies
+task fatJar(type: Jar) {
+	  manifest {
+        attributes 'Main-Class': 'com.ai_traders.examples.jersey_spring.App'
+    }
+    baseName = project.name
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    {
+        exclude "META-INF/*.SF"
+        exclude "META-INF/*.DSA"
+        exclude "META-INF/*.RSA"
+    }
+    with jar
+}
+
+
+repositories {
+     maven { url "http://repo.maven.apache.org/maven2" }
+}
+dependencyRecommendations {
+    mavenBom module: 'org.springframework:spring-framework-bom:4.3.7.RELEASE'
+}
+dependencies {
+    compile group: 'javax.ws.rs', name: 'javax.ws.rs-api', version:'2.0.1'
+    compile group: 'javax.servlet', name: 'javax.servlet-api', version:'3.1.0'
+    compile group: 'org.glassfish.jersey.containers', name: 'jersey-container-servlet', version:'2.25'
+    compile group: 'org.glassfish.jersey.media', name: 'jersey-media-json-jackson', version:'2.25'
+    compile group: 'org.glassfish.jersey.containers', name: 'jersey-container-grizzly2-http', version:'2.25'
+    compile group: 'org.glassfish.jersey.ext', name: 'jersey-spring3', version:'2.25'
+    compile group: 'org.glassfish.grizzly', name: 'grizzly-http-servlet', version:'2.3.30'
+    compile group: 'org.springframework', name: 'spring-core', version:'4.3.7.RELEASE'
+    compile group: 'org.springframework', name: 'spring-context', version:'4.3.7.RELEASE'
+    compile group: 'org.springframework', name: 'spring-web', version:'4.3.7.RELEASE'
+    compile group: 'org.springframework', name: 'spring-jdbc', version:'4.3.7.RELEASE'
+    compile group: 'org.springframework', name: 'spring-tx', version:'4.3.7.RELEASE'
+    compile group: 'org.mockito', name: 'mockito-core', version:'2.7.21'
+    testCompile group: 'junit', name: 'junit', version:'4.12'
+    testCompile group: 'org.glassfish.jersey.test-framework.providers', name: 'jersey-test-framework-provider-grizzly2', version:'2.25'
+}

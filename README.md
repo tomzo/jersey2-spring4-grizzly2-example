@@ -5,10 +5,12 @@ Based on [official example](https://github.com/jersey/jersey/tree/2.25.x/example
 
 This is an opinionated example of getting all parts working together, which can be hard. Some main points:
 
+ * Java 8
  * Project should be deployed as self-hosting (fat) jar.
- * Tests should easily run on CLI `mvn test` and in graphical IDE (IntelliJ).
+ * Tests should easily run on CLI `mvn test` or `gradle test` and in graphical IDE (IntelliJ).
  * There should be unit tests where we can mock any selected service and using mockito for verification
  * There should be integration tests were we rely on spring to compose entire server
+ * I prefer gradle over maven, but this example has configured both build systems
 
 ## Standalone demo
 
@@ -16,8 +18,12 @@ Create a fat jar with maven:
 ```
 mvn package
 ```
+Or with gradle
+```
+./gradlew fatJar
+```
 
-Start server
+Start server (maven output is at `target/jersey-spring-1.0.0.jar`, gradle `build/libs/jersey-spring-1.0.0.jar`)
 ```console
 $ java -jar target/jersey-spring-1.0.0.jar
 "Hello World" Jersey-Spring Example com.ai_traders.examples.jersey_spring.App
